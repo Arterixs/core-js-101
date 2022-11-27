@@ -526,17 +526,18 @@ function getIdentityMatrix(/* n */) {
  *     0, 100 => [ 0, 1, 2, ..., 100 ]
  *     3, 3   => [ 3 ]
  */
-function getIntervalArray(start, end) {
-  const arr = new Array(end).fill();
-  let count = start;
-  const result = arr.map((item, index) => {
-    if (index === 0) {
-      return count;
-    }
-    count += 1;
-    return count;
-  });
-  return result;
+function getIntervalArray(/* start, end */) {
+  // const arr = new Array(end).fill();
+  // let count = start;
+  // const result = arr.map((item, index) => {
+  //   if (index === 0) {
+  //     return count;
+  //   }
+  //   count += 1;
+  //   return count;
+  // });
+  // return result;
+  throw new Error('Not implemented');
 }
 
 /**
