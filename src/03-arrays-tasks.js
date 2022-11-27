@@ -361,6 +361,7 @@ function getPositivesCount(arr) {
     if (typeof item === 'number') {
       return item > 0;
     }
+    return false;
   });
   return result.length;
 }
