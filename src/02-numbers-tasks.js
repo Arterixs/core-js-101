@@ -88,7 +88,11 @@ function getDistanceBetweenPoints(x1, y1, x2, y2) {
  */
 function getLinearEquationRoot(a, b) {
   let d = b;
-  d < 0 ? d = Math.abs(b) : d = -Math.abs(b);
+  if (d < 0) {
+    d = Math.abs(b);
+  } else {
+    d = -Math.abs(b);
+  }
   const result = d / a;
   if (result === 0) return 0;
   return result;

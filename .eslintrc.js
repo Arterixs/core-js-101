@@ -17,7 +17,5 @@ module.exports = {
   },
   rules: {
     "linebreak-style": 0,
-    "no-unused-expressions": ["error", { "allowTernary": true }],
-    "no-nested-ternary": 'off',
   },
 };

@@ -487,10 +487,18 @@ function toStringList(arr) {
  */
 function sortCitiesArray(arr) {
   arr.sort((a, b) => (a.country > b.country ? 1 : -1))
-    .sort((a, b) => (a.country !== b.country ? 1 : a.city > b.city ? 1 : -1));
+    .sort((a, b) => {
+      if (a.country === b.country) {
+        if (a.city > b.city) {
+          return 1;
+        }
+        return -1;
+      }
+      return false;
+    });
   return arr;
 }
-
+// a.country !== b.country ? 1 : a.city > b.city ? 1 : -1
 /**
  * Creates an identity matrix of the specified size
  *
