@@ -202,8 +202,22 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  const gorLine = '─';
+  const angleLineUpLeft = '┌';
+  const angleLineUpRight = '┐';
+  const anleLineBottomLeft = '└';
+  const anleLineBottomRight = '┘';
+  const vertLine = '│';
+  const gor = width - 2;
+  const vert = height - 2;
+  let rectangle = '';
+  rectangle = `${rectangle}${angleLineUpLeft}${gorLine.repeat(gor)}${angleLineUpRight}\n`;
+  for (let i = 0; i < vert; i += 1) {
+    rectangle = `${rectangle}${vertLine}${' '.repeat(gor)}${vertLine}\n`;
+  }
+  rectangle = `${rectangle}${anleLineBottomLeft}${gorLine.repeat(gor)}${anleLineBottomRight}\n`;
+  return rectangle;
 }
 
 
@@ -223,8 +237,40 @@ function getRectangleString(/* width, height */) {
  *    => 'NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm'
  *
  */
-function encodeToRot13(/* str */) {
-  throw new Error('Not implemented');
+function encodeToRot13(str) {
+  const ABC = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz'.split('');
+  const ABCLength = ABC.length / 2;
+  let count = 0;
+  let amount = 0;
+  const stringArr = str.split('');
+  const result = stringArr.map((item) => {
+    if (!/[a-zA-Z]/.test(item)) {
+      return item;
+    }
+    count = 0;
+    const indexIt = ABC.indexOf(item);
+    amount = indexIt;
+    let length = 0;
+    let stringed = '';
+    if (indexIt < ABCLength) {
+      length = ABCLength;
+    } else {
+      length = ABC.length;
+    }
+    for (let i = 0; i <= 13; i += 1) {
+      count += 1;
+      amount += 1;
+      if (amount === length) {
+        amount -= ABCLength;
+      }
+      if (count === 13) {
+        stringed = `${stringed}${ABC[amount]}`;
+        return stringed;
+      }
+    }
+    return stringed;
+  });
+  return result.join('');
 }
 
 /**
