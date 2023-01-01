@@ -27,8 +27,18 @@
  *  21 => 'Fizz'
  *
  */
-function getFizzBuzz(/* num */) {
-  throw new Error('Not implemented');
+function getFizzBuzz(num) {
+  let result = '';
+  if ((num % 3 === 0) && (num % 5 === 0)) {
+    result = 'FizzBuzz';
+  } else if (num % 5 === 0) {
+    result = 'Buzz';
+  } else if (num % 3 === 0) {
+    result = 'Fizz';
+  } else {
+    result = num;
+  }
+  return result;
 }
 
 
@@ -43,8 +53,14 @@ function getFizzBuzz(/* num */) {
  *   5  => 120
  *   10 => 3628800
  */
-function getFactorial(/* n */) {
-  throw new Error('Not implemented');
+function getFactorial(n) {
+  let result = 1;
+  let count = 0;
+  while (count < n) {
+    count += 1;
+    result *= count;
+  }
+  return result;
 }
 
 
@@ -60,8 +76,14 @@ function getFactorial(/* n */) {
  *   5,10  =>  45 ( = 5+6+7+8+9+10 )
  *   -1,1  =>  0  ( = -1 + 0 + 1 )
  */
-function getSumBetweenNumbers(/* n1, n2 */) {
-  throw new Error('Not implemented');
+function getSumBetweenNumbers(n1, n2) {
+  let result = n1;
+  let count = n1;
+  while (count < n2) {
+    count += 1;
+    result += count;
+  }
+  return result;
 }
 
 
@@ -80,8 +102,14 @@ function getSumBetweenNumbers(/* n1, n2 */) {
  *   10,1,1   =>  false
  *   10,10,10 =>  true
  */
-function isTriangle(/* a, b, c */) {
-  throw new Error('Not implemented');
+function isTriangle(a, b, c) {
+  const one = a + b;
+  const two = b + c;
+  const three = a + c;
+  if (a < two && b < three && c < one) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -164,8 +192,25 @@ function isInsideCircle(/* circle, point */) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(str) {
+  const obj = {};
+  let result = null;
+  str.split('').forEach((item) => {
+    if (obj[item]) {
+      obj[item] += 1;
+    } else {
+      obj[item] = 1;
+    }
+  });
+  let count = 0;
+  const array = Object.keys(obj);
+  array.forEach((item) => {
+    if (obj[item] === 1 && !count) {
+      result = item;
+      count += 1;
+    }
+  });
+  return result;
 }
 
 
@@ -208,8 +253,9 @@ function getIntervalString(/* a, b, isStartIncluded, isEndIncluded */) {
  * 'rotator' => 'rotator'
  * 'noon' => 'noon'
  */
-function reverseString(/* str */) {
-  throw new Error('Not implemented');
+function reverseString(str) {
+  const result = str.split('').reverse().join('');
+  return result;
 }
 
 
@@ -225,8 +271,9 @@ function reverseString(/* str */) {
  *   87354 => 45378
  *   34143 => 34143
  */
-function reverseInteger(/* num */) {
-  throw new Error('Not implemented');
+function reverseInteger(num) {
+  const result = String(num).split('').reverse().join('');
+  return Number(result);
 }
 
 
@@ -250,8 +297,26 @@ function reverseInteger(/* num */) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  const arr = String(ccn).split('');
+  let count = 1;
+  const check = Number(arr.splice(arr.length - 1, 1));
+  const array = arr.reverse().map((item) => {
+    count += 1;
+    if (count % 2 === 0 || count === 1) {
+      if (count === 1) count -= 1;
+      const result = String(Number(item) * 2);
+      const res = result.split('').reduce((a, b) => Number(a) + Number(b));
+      return Number(res);
+    }
+    return Number(item);
+  });
+  const summ = array.reduce((a, b) => a + b);
+  const checkNum = (10 - (summ % 10)) % 10;
+  if (check === checkNum) {
+    return true;
+  }
+  return false;
 }
 
 /**
@@ -268,8 +333,13 @@ function isCreditCardNumber(/* ccn */) {
  *   10000 ( 1+0+0+0+0 = 1 ) => 1
  *   165536 (1+6+5+5+3+6 = 26,  2+6 = 8) => 8
  */
-function getDigitalRoot(/* num */) {
-  throw new Error('Not implemented');
+function getDigitalRoot(num) {
+  const result = String(num).split('').reduce((a, b) => Number(a) + Number(b));
+  if (result > 9) {
+    const res2 = String(result).split('').reduce((a, b) => Number(a) + Number(b));
+    return res2;
+  }
+  return result;
 }
 
 
