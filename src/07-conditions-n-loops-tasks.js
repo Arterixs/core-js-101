@@ -145,8 +145,13 @@ function isTriangle(a, b, c) {
  *   { top:20, left:20, width: 20, height: 20 }    =>  false
  *
  */
-function doRectanglesOverlap(/* rect1, rect2 */) {
-  throw new Error('Not implemented');
+function doRectanglesOverlap(rect1, rect2) {
+  const top = rect1.top + rect1.height;
+  const left = rect1.left + rect1.width;
+  if (top > rect2.top && left > rect2.left) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -176,8 +181,15 @@ function doRectanglesOverlap(/* rect1, rect2 */) {
  *   { center: { x:0, y:0 }, radius:10 },  { x:10, y:10 }   => false
  *
  */
-function isInsideCircle(/* circle, point */) {
-  throw new Error('Not implemented');
+function isInsideCircle(circle, point) {
+  const x = (point.x - circle.center.x) ** 2;
+  const y = (point.y - circle.center.y) ** 2;
+  const sum = x + y;
+  const radius = circle.radius ** 2;
+  if (sum < radius) {
+    return true;
+  }
+  return false;
 }
 
 
@@ -364,8 +376,35 @@ function getDigitalRoot(num) {
  *   '{)' = false
  *   '{[(<{[]}>)]}' = true
  */
-function isBracketsBalanced(/* str */) {
-  throw new Error('Not implemented');
+function isBracketsBalanced(str) {
+  const array = str.split('');
+  const obj = {
+    '{': '}',
+    '[': ']',
+    '(': ')',
+    '<': '>',
+  };
+  let count = 0;
+  const amount = [];
+  const arrValues = Object.values(obj);
+  while (count < array.length) {
+    if (!obj[array[count]]) {
+      const index = arrValues.indexOf(array[count]);
+      if (arrValues[index] === obj[amount[amount.length - 1]]) {
+        amount.pop();
+        count += 1;
+      } else {
+        return false;
+      }
+    } else {
+      amount.push(array[count]);
+      count += 1;
+    }
+  }
+  if (amount.length > 0) {
+    return false;
+  }
+  return true;
 }
 
 
@@ -389,8 +428,8 @@ function isBracketsBalanced(/* str */) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  return Number(num.toString(n));
 }
 
 
